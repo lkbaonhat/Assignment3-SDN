@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <img src="/images/3mau.jpg" />
+            </div>
+            <div class="column">
+                <div class="content">
+                    <h1>Login</h1>
+                </div>
+                <% if (typeof errors !='undefined' ) { %>
+                    <% errors.forEach(function (error){ %>
+                        <div class="notification is-warning is-light">
+                            <%= error.msg %>
+                        </div>
+                        <% }); %>
+                            <% } %>
+
+                                <form method="post">
+                                    <div class="field">
+                                        <p class="control has-icons-left has-icons-right">
+                                            <input class="input" type="email" placeholder="Email" name="email">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control has-icons-left">
+                                            <input class="input" type="password" placeholder="Password" name="password">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control">
+                                            <button type="submit" class="button is-success">
+                                                Sign in
+                                            </button>
+                                        </p>
+                                    </div>
+                                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

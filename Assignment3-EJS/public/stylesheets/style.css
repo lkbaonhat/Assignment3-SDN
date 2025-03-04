@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.table {
+    margin: 20px auto;
+}
+
+.button {
+    margin-right: 5px;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Perfumes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">Perfume List</h1>
+                <table class="table is-fullwidth is-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Brand</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% perfumes.forEach(function(perfume) { %>
+                            <tr>
+                                <td>
+                                    <%= perfume.perfumeName %>
+                                </td>
+                                <td>
+                                    <%= perfume.brand.brandName %>
+                                </td>
+                                <td>
+                                    <%= perfume.price %>
+                                </td>
+                                <td>
+                                    <a href="/perfumes/<%= perfume._id %>/edit" class="button is-small is-info">Edit</a>
+                                    <form action="/perfumes/<%= perfume._id %>" method="get" style="display:inline;">
+                                        <button class="button is-small is-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column">
+                <h1 class="title">Add new perfume</h1>
+                <form id="perfumeForm">
+                    <input type="hidden" id="perfumeId" name="perfumeId">
+                    <div class="field">
+                        <label class="label" for="perfumeName">Name</label>
+                        <div class="control">
+                            <input class="input" type="text" id="perfumeName" name="perfumeName" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="uri">Image URI</label>
+                        <div class="control">
+                            <input class="input" type="text" id="uri" name="uri" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="price">Price</label>
+                        <div class="control">
+                            <input class="input" type="number" id="price" name="price" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="concentration">Concentration</label>
+                        <div class="control">
+                            <input class="input" type="text" id="concentration" name="concentration" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="description">Description</label>
+                        <div class="control">
+                            <textarea class="textarea" id="description" name="description" required></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="ingredients">Ingredients</label>
+                        <div class="control">
+                            <textarea class="textarea" id="ingredients" name="ingredients" required></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="volume">Volume</label>
+                        <div class="control">
+                            <input class="input" type="number" id="volume" name="volume" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="targetAudience">Target Audience</label>
+                        <div class="control">
+                            <input class="input" type="text" id="targetAudience" name="targetAudience" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="brand">Brand</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="brand" name="brand" required>
+                                    <% brands.forEach(function(brand) { %>
+                                        <option value="<%= brand._id %>">
+                                            <%= brand.brandName %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
