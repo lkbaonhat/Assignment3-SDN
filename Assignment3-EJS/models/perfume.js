@@ -1,64 +1,51 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const commentSchema = new Schema({
-    rating: {
-        type: Number,
-        min: 1,
-        max: 3,
-        require: true
-    },
-    content: {
-        type: String,
-        require: true
-    },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "members",
-        require: true
-    }
-}, { timestamps: true })
+const commentSchema = require('./comment');
 
 const perfumeSchema = new Schema({
     perfumeName: {
         type: String,
-        require: true
+        required: true
     },
     uri: {
         type: String,
-        require: true
+        required: true
     },
     price: {
         type: Number,
-        require: true
+        required: true
     },
     concentration: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     ingredients: {
         type: String,
-        require: true
+        required: true
     },
     volume: {
         type: Number,
-        require: true
+        required: true
     },
     targetAudience: {
         type: String,
-        require: true
+        required: true,
+        enum: ['male', 'female', 'unisex']
     },
     comments: [commentSchema],
     brand: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "brands",
-        require: true
-    },
+        ref: "Brand",
+        required: true
+    }
+}, {
+    timestamps: true
 });
 
-const Perfume = mongoose.model('perfumes', perfumeSchema)
+const Perfume = mongoose.model('Perfume', perfumeSchema);
+
 module.exports = Perfume;

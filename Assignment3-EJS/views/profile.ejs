@@ -1,0 +1,119 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Profile</h1>
+
+                <% if(typeof success_msg !=='undefined' && success_msg.length> 0) { %>
+                    <div class="notification is-success">
+                        <%= success_msg %>
+                    </div>
+                    <% } %>
+
+                        <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                            <div class="notification is-danger">
+                                <%= error_msg %>
+                            </div>
+                            <% } %>
+
+                                <div class="columns">
+                                    <div class="column is-one-quarter">
+                                        <aside class="menu">
+                                            <p class="menu-label">
+                                                Account
+                                            </p>
+                                            <ul class="menu-list">
+                                                <li><a class="is-active">Profile</a></li>
+                                                <li><a href="/auth/change-password/<%= member._id %>">Change
+                                                        Password</a></li>
+                                            </ul>
+                                        </aside>
+                                    </div>
+
+                                    <div class="column">
+                                        <div class="box">
+                                            <h2 class="title is-4">User Information</h2>
+                                            <form action="/auth/profile/<%= member._id %>?_method=PUT" method="POST">
+                                                <div class="field">
+                                                    <label class="label">Email</label>
+                                                    <div class="control">
+                                                        <input class="input" type="email" value="<%= member.email %>"
+                                                            readonly disabled>
+                                                    </div>
+                                                    <p class="help">Email cannot be changed</p>
+                                                </div>
+
+                                                <div class="field">
+                                                    <label class="label">Name</label>
+                                                    <div class="control">
+                                                        <input class="input" type="text" name="name"
+                                                            value="<%= member.name %>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="field">
+                                                    <label class="label">Year of Birth</label>
+                                                    <div class="control">
+                                                        <input class="input" type="number" name="YOB"
+                                                            value="<%= member.YOB %>" min="1900"
+                                                            max="<%= new Date().getFullYear() %>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="field">
+                                                    <label class="label">Gender</label>
+                                                    <div class="control">
+                                                        <label class="radio">
+                                                            <input type="radio" name="gender" value="true"
+                                                                <%=member.gender ? 'checked' : '' %> required>
+                                                            Male
+                                                        </label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="gender" value="false"
+                                                                <%=!member.gender ? 'checked' : '' %>>
+                                                            Female
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <button type="submit" class="button is-primary">Update
+                                                            Profile</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="box">
+                                            <h2 class="title is-4">Account Status</h2>
+                                            <table class="table is-fullwidth">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Account Type</td>
+                                                        <td>
+                                                            <%= member.isAdmin ? 'Admin' : 'Regular User' %>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member Since</td>
+                                                        <td>
+                                                            <%= member.createdAt.toLocaleDateString() %>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Last Updated</td>
+                                                        <td>
+                                                            <%= member.updatedAt.toLocaleDateString() %>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

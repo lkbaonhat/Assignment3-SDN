@@ -4,8 +4,12 @@ const Schema = mongoose.Schema;
 const brandSchema = new Schema({
     brandName: {
         type: String,
+        required: true
     }
-}, { timestamps: true });
+}, {
+    timestamps: true
+});
 
-const Brand = mongoose.model('brands', brandSchema)
+const Brand = mongoose.model('Brand', brandSchema);
+
 module.exports = Brand;

@@ -1,0 +1,65 @@
+<nav class="navbar is-info" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <strong>Perfume Collection</strong>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarMain" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/">
+                Home
+            </a>
+
+            <% if(typeof currentUser !=='undefined' && currentUser) { %>
+                <% if(currentUser.isAdmin) { %>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Admin
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="/brands">
+                                Manage Brands
+                            </a>
+                            <a class="navbar-item" href="/perfumes">
+                                Manage Perfumes
+                            </a>
+                            <a class="navbar-item" href="/collectors">
+                                View Members
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% } %>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <% if(typeof currentUser !=='undefined' && currentUser) { %>
+                        <a class="button is-light" href="/auth/profile/<%= currentUser._id %>">
+                            <i class="fas fa-user-circle"></i>&nbsp;<%= currentUser.name %>
+                        </a>
+                        <a class="button is-danger" href="/auth/logout">
+                            <strong>Log out</strong>
+                        </a>
+                        <% } else { %>
+                            <a class="button is-primary" href="/auth/register">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light" href="/auth/login">
+                                Log in
+                            </a>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

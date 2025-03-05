@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">
+                    <%= title %>
+                </h1>
+
+                <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                    <div class="notification is-danger">
+                        <%= error_msg %>
+                    </div>
+                    <% } %>
+
+                        <div class="columns">
+                            <div class="column is-half">
+                                <div class="box">
+                                    <form action="<%= brand ? `/brands/${brand._id}?_method=PUT` : '/brands' %>"
+                                        method="POST">
+                                        <div class="field">
+                                            <label class="label">Brand Name</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="brandName"
+                                                    value="<%= brand ? brand.brandName : '' %>" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="field is-grouped">
+                                            <div class="control">
+                                                <button type="submit" class="button is-primary">
+                                                    <%= brand ? 'Update Brand' : 'Add Brand' %>
+                                                </button>
+                                            </div>
+                                            <div class="control">
+                                                <a href="/brands" class="button is-light">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

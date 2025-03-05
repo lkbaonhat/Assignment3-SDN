@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-const perfumeController = require('../controllers/perfumeController');
+const express = require('express');
+const router = express.Router();
+const indexController = require('../controllers/indexController');
 
-/* GET home page. */
-router.route('/')
-  .get(perfumeController.getAllPerfumesHomePage)
+// Home page - display all perfumes
+router.get('/', indexController.getHomePage);
 
-router.route('/:perfumeID')
-  .get(perfumeController.getDetailPerfumeHomePage)
+// Search perfumes by name
+router.get('/search', indexController.searchPerfumes);
+
+// Filter perfumes by brand
+router.get('/filter', indexController.filterPerfumesByBrand);
 
 module.exports = router;

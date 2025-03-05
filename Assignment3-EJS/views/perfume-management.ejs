@@ -1,0 +1,123 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Perfume Management</h1>
+
+                <% if(typeof success_msg !=='undefined' && success_msg.length> 0) { %>
+                    <div class="notification is-success">
+                        <%= success_msg %>
+                    </div>
+                    <% } %>
+
+                        <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                            <div class="notification is-danger">
+                                <%= error_msg %>
+                            </div>
+                            <% } %>
+
+                                <div class="buttons mb-5">
+                                    <a href="/perfumes/new" class="button is-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                        <span>Add New Perfume</span>
+                                    </a>
+                                </div>
+
+                                <div class="table-container">
+                                    <table class="table is-fullwidth is-striped is-hoverable">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Brand</th>
+                                                <th>Price</th>
+                                                <th>Concentration</th>
+                                                <th>Volume</th>
+                                                <th>Target</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(perfumes.length> 0) { %>
+                                                <% perfumes.forEach(perfume=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <figure class="image is-64x64">
+                                                                <img src="<%= perfume.uri %>"
+                                                                    alt="<%= perfume.perfumeName %>">
+                                                            </figure>
+                                                        </td>
+                                                        <td>
+                                                            <%= perfume.perfumeName %>
+                                                        </td>
+                                                        <td>
+                                                            <%= perfume.brand.brandName %>
+                                                        </td>
+                                                        <td>$<%= perfume.price %>
+                                                        </td>
+                                                        <td>
+                                                            <%= perfume.concentration %>
+                                                        </td>
+                                                        <td>
+                                                            <%= perfume.volume %> ml
+                                                        </td>
+                                                        <td>
+                                                            <% if(perfume.targetAudience==='male' ) { %>
+                                                                <span class="icon has-text-info">
+                                                                    <i class="fas fa-mars"></i>
+                                                                </span>
+                                                                <% } else if(perfume.targetAudience==='female' ) { %>
+                                                                    <span class="icon has-text-danger">
+                                                                        <i class="fas fa-venus"></i>
+                                                                    </span>
+                                                                    <% } else { %>
+                                                                        <span class="icon">
+                                                                            <i class="fas fa-venus-mars"></i>
+                                                                        </span>
+                                                                        <% } %>
+                                                                            <%= perfume.targetAudience %>
+                                                        </td>
+                                                        <td>
+                                                            <div class="buttons are-small">
+                                                                <a href="/perfumes/<%= perfume._id %>"
+                                                                    class="button is-info">
+                                                                    <span class="icon">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                </a>
+                                                                <a href="/perfumes/<%= perfume._id %>/edit"
+                                                                    class="button is-warning">
+                                                                    <span class="icon">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </span>
+                                                                </a>
+                                                                <form
+                                                                    action="/perfumes/<%= perfume._id %>?_method=DELETE"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('Are you sure you want to delete this perfume?');">
+                                                                    <button type="submit" class="button is-danger">
+                                                                        <span class="icon">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <tr>
+                                                                <td colspan="8" class="has-text-centered">No perfumes
+                                                                    found.</td>
+                                                            </tr>
+                                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

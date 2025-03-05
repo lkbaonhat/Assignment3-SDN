@@ -1,54 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <title>Register</title>
-</head>
+        <section class="section">
+            <div class="container">
+                <h1 class="title has-text-centered">Register</h1>
 
-<body>
-    <div class="container">
-        <div class="content ">
-            <h1>Register</h1>
-        </div>
-        <% if (typeof errors !='undefined' ) { %>
-            <% errors.forEach(function (error){ %>
-                <div class="notification is-warning is-light">
-                    <%= error.msg %>
-                </div>
-            <% }); %>
-        <% } %>
-        <form method="post" class="box">
-                            <div class="field">
-                                <p class="control has-icons-left has-icons-right">
-                                    <input class="input" type="email" placeholder="Email" name="email">
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                    <span class="icon is-small is-right">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="field">
-                                <p class="control has-icons-left">
-                                    <input class="input" type="password" placeholder="Password" name="password">
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="field">
-                                <p class="control">
-                                    <button type="submit" class="button is-success">
-                                        Sign up
-                                    </button>
-                                </p>
-                            </div>
-        </form>
-    </div>
-</body>
+                <% if(typeof errors !=='undefined' ) { %>
+                    <% errors.forEach(function(error) { %>
+                        <div class="notification is-danger">
+                            <%= error.msg %>
+                        </div>
+                        <% }) %>
+                            <% } %>
 
-</html>
+                                <% if(typeof success_msg !=='undefined' && success_msg.length> 0) { %>
+                                    <div class="notification is-success">
+                                        <%= success_msg %>
+                                    </div>
+                                    <% } %>
+
+                                        <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                                            <div class="notification is-danger">
+                                                <%= error_msg %>
+                                            </div>
+                                            <% } %>
+
+                                                <div class="columns is-centered">
+                                                    <div class="column is-half">
+                                                        <div class="box">
+                                                            <form action="/auth/register" method="POST">
+                                                                <div class="field">
+                                                                    <label class="label">Email</label>
+                                                                    <div class="control has-icons-left">
+                                                                        <input class="input" type="email" name="email"
+                                                                            placeholder="e.g. example@example.com"
+                                                                            value="<%= typeof email !== 'undefined' ? email : '' %>"
+                                                                            required>
+                                                                        <span class="icon is-small is-left">
+                                                                            <i class="fas fa-envelope"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <label class="label">Name</label>
+                                                                    <div class="control has-icons-left">
+                                                                        <input class="input" type="text" name="name"
+                                                                            placeholder="Your name"
+                                                                            value="<%= typeof name !== 'undefined' ? name : '' %>"
+                                                                            required>
+                                                                        <span class="icon is-small is-left">
+                                                                            <i class="fas fa-user"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <label class="label">Year of Birth</label>
+                                                                    <div class="control has-icons-left">
+                                                                        <input class="input" type="number" name="YOB"
+                                                                            placeholder="e.g. 1990"
+                                                                            value="<%= typeof YOB !== 'undefined' ? YOB : '' %>"
+                                                                            min="1900"
+                                                                            max="<%= new Date().getFullYear() %>"
+                                                                            required>
+                                                                        <span class="icon is-small is-left">
+                                                                            <i class="fas fa-calendar"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <label class="label">Gender</label>
+                                                                    <div class="control">
+                                                                        <label class="radio">
+                                                                            <input type="radio" name="gender"
+                                                                                value="true" <%=typeof gender
+                                                                                !=='undefined' && gender==='true'
+                                                                                ? 'checked' : '' %> required>
+                                                                            Male
+                                                                        </label>
+                                                                        <label class="radio">
+                                                                            <input type="radio" name="gender"
+                                                                                value="false" <%=typeof gender
+                                                                                !=='undefined' && gender==='false'
+                                                                                ? 'checked' : '' %>>
+                                                                            Female
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <label class="label">Password</label>
+                                                                    <div class="control has-icons-left">
+                                                                        <input class="input" type="password"
+                                                                            name="password" placeholder="********"
+                                                                            required>
+                                                                        <span class="icon is-small is-left">
+                                                                            <i class="fas fa-lock"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <label class="label">Confirm Password</label>
+                                                                    <div class="control has-icons-left">
+                                                                        <input class="input" type="password"
+                                                                            name="password2" placeholder="********"
+                                                                            required>
+                                                                        <span class="icon is-small is-left">
+                                                                            <i class="fas fa-lock"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="field">
+                                                                    <div class="control">
+                                                                        <button type="submit"
+                                                                            class="button is-primary is-fullwidth">
+                                                                            Register
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <div class="has-text-centered mt-4">
+                                                                <p>Already have an account? <a
+                                                                        href="/auth/login">Login</a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

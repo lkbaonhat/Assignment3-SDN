@@ -1,0 +1,85 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Brand Management</h1>
+
+                <% if(typeof success_msg !=='undefined' && success_msg.length> 0) { %>
+                    <div class="notification is-success">
+                        <%= success_msg %>
+                    </div>
+                    <% } %>
+
+                        <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                            <div class="notification is-danger">
+                                <%= error_msg %>
+                            </div>
+                            <% } %>
+
+                                <div class="buttons mb-5">
+                                    <a href="/brands/new" class="button is-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                        <span>Add New Brand</span>
+                                    </a>
+                                </div>
+
+                                <div class="table-container">
+                                    <table class="table is-fullwidth is-striped is-hoverable">
+                                        <thead>
+                                            <tr>
+                                                <th>Brand Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(brands.length> 0) { %>
+                                                <% brands.forEach(brand=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= brand.brandName %>
+                                                        </td>
+                                                        <td>
+                                                            <%= brand.createdAt.toLocaleDateString() %>
+                                                        </td>
+                                                        <td>
+                                                            <%= brand.updatedAt.toLocaleDateString() %>
+                                                        </td>
+                                                        <td>
+                                                            <div class="buttons are-small">
+                                                                <a href="/brands/<%= brand._id %>/edit"
+                                                                    class="button is-warning">
+                                                                    <span class="icon">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </span>
+                                                                </a>
+                                                                <form action="/brands/<%= brand._id %>?_method=DELETE"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('Are you sure you want to delete this brand?');">
+                                                                    <button type="submit" class="button is-danger">
+                                                                        <span class="icon">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <tr>
+                                                                <td colspan="4" class="has-text-centered">No brands
+                                                                    found.</td>
+                                                            </tr>
+                                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

@@ -1,0 +1,68 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Member Collection</h1>
+
+                <% if(typeof success_msg !=='undefined' && success_msg.length> 0) { %>
+                    <div class="notification is-success">
+                        <%= success_msg %>
+                    </div>
+                    <% } %>
+
+                        <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                            <div class="notification is-danger">
+                                <%= error_msg %>
+                            </div>
+                            <% } %>
+
+                                <div class="table-container">
+                                    <table class="table is-fullwidth is-striped is-hoverable">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Year of Birth</th>
+                                                <th>Gender</th>
+                                                <th>Role</th>
+                                                <th>Member Since</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(members.length> 0) { %>
+                                                <% members.forEach(member=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= member.name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= member.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= member.YOB %>
+                                                        </td>
+                                                        <td>
+                                                            <%= member.gender ? 'Male' : 'Female' %>
+                                                        </td>
+                                                        <td>
+                                                            <%= member.isAdmin ? 'Admin' : 'Regular User' %>
+                                                        </td>
+                                                        <td>
+                                                            <%= member.createdAt.toLocaleDateString() %>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <tr>
+                                                                <td colspan="6" class="has-text-centered">No members
+                                                                    found.</td>
+                                                            </tr>
+                                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

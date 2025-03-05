@@ -1,0 +1,154 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="title">
+                    <%= title %>
+                </h1>
+
+                <% if(typeof error_msg !=='undefined' && error_msg.length> 0) { %>
+                    <div class="notification is-danger">
+                        <%= error_msg %>
+                    </div>
+                    <% } %>
+
+                        <form action="<%= perfume ? `/perfumes/${perfume._id}?_method=PUT` : '/perfumes' %>"
+                            method="POST">
+                            <div class="columns">
+                                <div class="column is-half">
+                                    <div class="box">
+                                        <div class="field">
+                                            <label class="label">Perfume Name</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="perfumeName"
+                                                    value="<%= perfume ? perfume.perfumeName : '' %>" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Image URL</label>
+                                            <div class="control">
+                                                <input class="input" type="text" name="uri"
+                                                    value="<%= perfume ? perfume.uri : '' %>" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Price ($)</label>
+                                            <div class="control">
+                                                <input class="input" type="number" name="price" step="0.01" min="0"
+                                                    value="<%= perfume ? perfume.price : '' %>" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Volume (ml)</label>
+                                            <div class="control">
+                                                <input class="input" type="number" name="volume" step="0.1" min="0"
+                                                    value="<%= perfume ? perfume.volume : '' %>" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Brand</label>
+                                            <div class="control">
+                                                <div class="select is-fullwidth">
+                                                    <select name="brand" required>
+                                                        <option value="">Select a brand</option>
+                                                        <% brands.forEach(brand=> { %>
+                                                            <option value="<%= brand._id %>" <%=perfume &&
+                                                                perfume.brand.toString()===brand._id.toString()
+                                                                ? 'selected' : '' %>>
+                                                                <%= brand.brandName %>
+                                                            </option>
+                                                            <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column is-half">
+                                    <div class="box">
+                                        <div class="field">
+                                            <label class="label">Concentration</label>
+                                            <div class="control">
+                                                <div class="select is-fullwidth">
+                                                    <select name="concentration" required>
+                                                        <option value="">Select concentration</option>
+                                                        <option value="Extrait" <%=perfume &&
+                                                            perfume.concentration==='Extrait' ? 'selected' : '' %>
+                                                            >Extrait</option>
+                                                        <option value="Eau de Parfum" <%=perfume &&
+                                                            perfume.concentration==='Eau de Parfum' ? 'selected' : '' %>
+                                                            >Eau de Parfum (EDP)</option>
+                                                        <option value="Eau de Toilette" <%=perfume &&
+                                                            perfume.concentration==='Eau de Toilette' ? 'selected' : ''
+                                                            %>>Eau de Toilette (EDT)</option>
+                                                        <option value="Eau de Cologne" <%=perfume &&
+                                                            perfume.concentration==='Eau de Cologne' ? 'selected' : ''
+                                                            %>>Eau de Cologne (EDC)</option>
+                                                        <option value="Eau Fraiche" <%=perfume &&
+                                                            perfume.concentration==='Eau Fraiche' ? 'selected' : '' %>
+                                                            >Eau Fraiche</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Target Audience</label>
+                                            <div class="control">
+                                                <div class="select is-fullwidth">
+                                                    <select name="targetAudience" required>
+                                                        <option value="">Select target audience</option>
+                                                        <option value="male" <%=perfume &&
+                                                            perfume.targetAudience==='male' ? 'selected' : '' %>>Male
+                                                        </option>
+                                                        <option value="female" <%=perfume &&
+                                                            perfume.targetAudience==='female' ? 'selected' : '' %>
+                                                            >Female</option>
+                                                        <option value="unisex" <%=perfume &&
+                                                            perfume.targetAudience==='unisex' ? 'selected' : '' %>
+                                                            >Unisex</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Description</label>
+                                            <div class="control">
+                                                <textarea class="textarea" name="description" rows="4"
+                                                    required><%= perfume ? perfume.description : '' %></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Ingredients</label>
+                                            <div class="control">
+                                                <textarea class="textarea" name="ingredients" rows="4"
+                                                    required><%= perfume ? perfume.ingredients : '' %></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary">
+                                        <%= perfume ? 'Update Perfume' : 'Add Perfume' %>
+                                    </button>
+                                </div>
+                                <div class="control">
+                                    <a href="/perfumes" class="button is-light">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

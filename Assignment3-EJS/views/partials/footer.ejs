@@ -1,0 +1,39 @@
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Perfume Collection</strong> by <a href="#">Your Name</a>.
+            The source code is licensed under <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(el => {
+            el.addEventListener('click', () => {
+                // Get the target from the "data-target" attribute
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+            });
+        });
+
+        // Messages auto-close after 5 seconds
+        setTimeout(() => {
+            const messages = document.querySelectorAll('.notification.is-success, .notification.is-danger');
+            messages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 5000);
+    });
+</script>
+</body>
+
+</html>

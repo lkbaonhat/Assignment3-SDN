@@ -1,1 +1,19 @@
-<%= error %>
+<%- include('partials/header') %>
+  <%- include('partials/navbar') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="notification is-danger">
+          <p class="title">Error</p>
+          <p>
+            <%= error.message || 'An unexpected error occurred' %>
+          </p>
+          <% if (error.stack && process.env.NODE_ENV !=='production' ) { %>
+            <pre><%= error.stack %></pre>
+            <% } %>
+        </div>
+        <a href="/" class="button is-info">Back to Home</a>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>

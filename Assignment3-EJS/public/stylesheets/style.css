@@ -1,17 +1,344 @@
+/* Custom CSS for Perfume Management Application */
+
+/* Global styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+.main-content {
+  flex: 1;
 }
 
-.table {
-    margin: 20px auto;
+footer {
+  margin-top: auto;
 }
 
-.button {
-    margin-right: 5px;
+/* Enhanced navbar */
+.navbar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand strong {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Card enhancements */
+.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Perfume concentration styles */
+.concentration-extrait {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  margin: 0.5rem 0;
+  border: 2px solid #DAA520;
+  position: relative;
+  overflow: hidden;
+}
+
+.concentration-extrait::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #FFD700, transparent, #FFA500);
+  opacity: 0.3;
+  animation: shine 2s infinite linear;
+  z-index: 0;
+}
+
+.concentration-extrait .icon,
+.concentration-extrait span {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.concentration-edp {
+  background-color: #e6f7ff;
+  border-left: 4px solid #1890ff;
+  padding: 0.5rem;
+}
+
+.concentration-edt {
+  background-color: #f6ffed;
+  border-left: 4px solid #52c41a;
+  padding: 0.5rem;
+}
+
+.concentration-edc {
+  background-color: #fff7e6;
+  border-left: 4px solid #faad14;
+  padding: 0.5rem;
+}
+
+/* Rating stars */
+.rating-stars {
+  color: #FFD700;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+/* Form enhancements */
+.input:focus, .textarea:focus, .select select:focus {
+  box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+}
+
+/* Custom buttons */
+.button.is-perfume {
+  background-color: #8a2be2;
+  color: white;
+  transition: all 0.3s;
+}
+
+.button.is-perfume:hover {
+  background-color: #7209b7;
+  color: white;
+}
+
+/* Custom form label */
+.label.is-perfume {
+  color: #7209b7;
+}
+
+/* Custom box shadow for important elements */
+.important-box {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.important-box:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated notifications */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification {
+  animation: slideInRight 0.5s ease-out;
+  margin-bottom: 1rem;
+}
+
+/* Profile section */
+.profile-section {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Comments section */
+.review-box {
+  border-left: 4px solid #7209b7;
+  transition: transform 0.3s;
+}
+
+.review-box:hover {
+  transform: translateX(5px);
+}
+
+/* Gender icons */
+.gender-male {
+  color: #1890ff;
+}
+
+.gender-female {
+  color: #eb2f96;
+}
+
+.gender-unisex {
+  color: #722ed1;
+}
+
+/* Hero section for homepage */
+.hero.is-perfume {
+  background: linear-gradient(135deg, #7209b7, #3a0ca3);
+  color: white;
+}
+
+.hero.is-perfume .title,
+.hero.is-perfume .subtitle {
+  color: white;
+}
+
+/* Search box enhancement */
+.search-box {
+  transition: all 0.3s;
+}
+
+.search-box:focus-within {
+  transform: scale(1.02);
+}
+
+/* Custom table enhancements */
+.table-container {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Price tag style */
+.price-tag {
+  background-color: #f5f5f5;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #7209b7;
+  display: inline-block;
+}
+
+/* Volume badge */
+.volume-badge {
+  background-color: #e6f7ff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #1890ff;
+}
+
+/* Brand pill */
+.brand-pill {
+  background-color: #f9f0ff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 16px;
+  color: #722ed1;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* Admin badge */
+.admin-badge {
+  background-color: #fff2e8;
+  color: #fa541c;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Loading animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(114, 46, 209, 0.3);
+  border-radius: 50%;
+  border-top-color: #722ed1;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Image hover effect */
+.zoom-effect {
+  overflow: hidden;
+}
+
+.zoom-effect img {
+  transition: transform 0.5s;
+}
+
+.zoom-effect:hover img {
+  transform: scale(1.05);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #8c8c8c;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7209b7;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5c0991;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .concentration-extrait {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .rating-stars {
+    font-size: 1rem;
+  }
 }

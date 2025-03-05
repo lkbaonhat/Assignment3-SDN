@@ -1,33 +1,58 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const memberSchema = new Schema({
     email: {
         type: String,
-        require: true
+        required: true,
+        unique: true,
+        trim: true
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     name: {
         type: String,
-        default: ''
+        required: true
     },
     YOB: {
         type: Number,
-        default: 0
+        required: true
     },
     gender: {
         type: Boolean,
-        default: true
+        required: true
     },
     isAdmin: {
         type: Boolean,
         default: false
     }
-}, { timestamps: true });
+}, {
+    timestamps: true
+});
 
-const Member = mongoose.model('members', memberSchema)
+// Hash password before saving
+memberSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Method to compare password
+memberSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
+const Member = mongoose.model('Member', memberSchema);
+
 module.exports = Member;
-
