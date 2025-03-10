@@ -272,7 +272,7 @@ const deleteComment = async (req, res) => {
         }
 
         // Remove comment
-        comment.remove();
+        perfume.comments.remove(comment);
         await perfume.save();
 
         req.flash('success_msg', 'Comment deleted successfully');

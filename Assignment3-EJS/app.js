@@ -40,7 +40,7 @@ app.use(async (req, res, next) => {
     next();
   } catch (error) {
     // Token expired or invalid
-    res.clearCookie('jwt');
+    res.clearCookie('jwt')
     next();
   }
 });

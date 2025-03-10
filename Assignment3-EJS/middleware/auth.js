@@ -8,7 +8,7 @@ const isAuthenticated = async (req, res, next) => {
 
         if (!token) {
             req.flash('error_msg', 'Please log in to access this resource');
-            return res.redirect('/login');
+            return res.redirect('/auth/login');
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret');
@@ -16,14 +16,14 @@ const isAuthenticated = async (req, res, next) => {
 
         if (!member) {
             req.flash('error_msg', 'User not found');
-            return res.redirect('/login');
+            return res.redirect('/auth/login');
         }
 
         req.member = member;
         next();
     } catch (error) {
         req.flash('error_msg', 'Invalid token. Please log in again.');
-        res.redirect('/login');
+        res.redirect('/auth/login');
     }
 };
 
